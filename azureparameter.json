@@ -1,0 +1,98 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northcentralus"
+        },
+        "networkInterfaceName": {
+            "value": "workvmnic"
+        },
+        "networkSecurityGroupName": {
+            "value": "WorkVM-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "Work-vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.0.0.0/24"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                }
+            ]
+        },
+        "publicIpAddressName": {
+            "value": "WorkVM-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "virtualMachineName": {
+            "value": "WorkVM"
+        },
+        "virtualMachineComputerName": {
+            "value": "WorkVM"
+        },
+        "virtualMachineRG": {
+            "value": "Work"
+        },
+        "osDiskType": {
+            "value": "Premium_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2s_v3"
+        },
+        "adminUsername": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/adc036c3-9127-4a36-b2cb-162abe761434/resourceGroups/Services/providers/Microsoft.KeyVault/vaults/vEFbkKIKMBzC"
+                },
+                "secretName": "Admin"
+            }
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/adc036c3-9127-4a36-b2cb-162abe761434/resourceGroups/Services/providers/Microsoft.KeyVault/vaults/vEFbkKIKMBzC"
+                },
+                "secretName": "Password"
+                }
+            }
+
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        }
+    }
+}
